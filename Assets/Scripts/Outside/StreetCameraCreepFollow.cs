@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class OutsideCameraCreepFollow : MonoBehaviour {
+public class StreetCameraCreepFollow : MonoBehaviour {
   [Header("Configuration")]
   public Transform target;
   public float speed = 4;

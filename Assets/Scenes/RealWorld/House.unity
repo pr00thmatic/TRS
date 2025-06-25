@@ -171,11 +171,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2724827156469588745, guid: 80c791c5a1ecddd47b3d220e300f162f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5797590428980498208, guid: 80c791c5a1ecddd47b3d220e300f162f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 311201081}
   m_SourcePrefab: {fileID: 100100000, guid: 80c791c5a1ecddd47b3d220e300f162f, type: 3}
+--- !u!1 &311201078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5797590428980498208, guid: 80c791c5a1ecddd47b3d220e300f162f, type: 3}
+  m_PrefabInstance: {fileID: 287711191}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &311201081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311201078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296b4e1ecf61d79439e30d061b169783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surveillanceSystem: {fileID: 1510508333}
+  speed: 1
+  animator: {fileID: 980079159}
 --- !u!1001 &486805409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,6 +265,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2412377658611507347, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
   m_PrefabInstance: {fileID: 486805409}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &980079159 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1116446950001799834, guid: 80c791c5a1ecddd47b3d220e300f162f, type: 3}
+  m_PrefabInstance: {fileID: 287711191}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1029041422
 PrefabInstance:
@@ -447,11 +476,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7697160601368793502, guid: f68236b1db365c047a2390bf3449d620, type: 3}
   m_PrefabInstance: {fileID: 1161699086}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1336846396 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5700200867391814180, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
+  m_PrefabInstance: {fileID: 3901686319032847936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1477027002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2412377658611507347, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
   m_PrefabInstance: {fileID: 3901686319032847936}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1510508332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510508334}
+  - component: {fileID: 1510508333}
+  m_Layer: 0
+  m_Name: SurveillanceSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1510508333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510508332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2664b5ace19f07d48882a1a23a114bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCamera: {fileID: 1336846396}
+--- !u!4 &1510508334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510508332}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.7112799, y: 1.4061042, z: -2.4954526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709913936
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,3 +946,4 @@ SceneRoots:
   - {fileID: 2085341877}
   - {fileID: 1831914405}
   - {fileID: 287711191}
+  - {fileID: 1510508334}

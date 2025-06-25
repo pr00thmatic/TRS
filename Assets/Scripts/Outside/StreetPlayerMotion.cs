@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerMotion : MonoBehaviour {
+public class StreetPlayerMotion : MonoBehaviour {
   [Header("Configuration")]
   public float speed = 3;
 

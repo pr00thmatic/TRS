@@ -76,13 +76,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
-    path: InsidePlayer
+    attribute: weight
+    path: OutsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
     flags: 0
@@ -97,13 +97,13 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
-    path: OutsidePlayer
+    attribute: weight
+    path: InsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
     flags: 0
@@ -143,8 +143,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2589715623
-      attribute: 608326933
+      path: 696110878
+      attribute: 130897217
       script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
       typeID: 114
       customType: 0
@@ -152,8 +152,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 696110878
-      attribute: 608326933
+      path: 2589715623
+      attribute: 130897217
       script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
       typeID: 114
       customType: 0
@@ -314,27 +314,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: ikControl
-    path: InsidePlayer
-    classID: 114
-    script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
         value: -0.647
         inSlope: 0
         outSlope: 0
@@ -403,13 +382,34 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
+    attribute: weight
     path: OutsidePlayer
+    classID: 114
+    script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: weight
+    path: InsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
     flags: 0

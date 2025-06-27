@@ -1,0 +1,76 @@
+# Root project settings
+root = true
+
+[*.cs]
+
+############ INDENTATION ############
+
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+############ NEWLINES / BRACES ############
+
+# You like your braces on the same line, but spaced cleanly
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_members_in_object_initializers = false
+csharp_new_line_between_query_expression_clauses = true
+
+# Keep blocks tight
+csharp_preserve_single_line_blocks = true
+
+############ SPACING ############
+
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_after_cast = true
+
+# You like compact ternaries and lambda expressions
+csharp_style_expression_bodied_methods = when_possible:suggestion
+csharp_style_expression_bodied_operators = when_possible:suggestion
+
+############ VAR / TYPE ############
+
+# You prefer explicit types for clarity, but var is okay for new()
+csharp_style_var_elsewhere = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_for_built_in_types = false:suggestion
+
+############ NAMING CONVENTIONS ############
+
+# You use camelCase for fields, PascalCase for public, and no underscores
+dotnet_naming_rule.private_fields_no_prefix.symbols = private_fields
+dotnet_naming_rule.private_fields_no_prefix.style = camelCase
+dotnet_naming_rule.private_fields_no_prefix.severity = suggestion
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.required_modifiers =
+
+dotnet_naming_style.camelCase.capitalization = camel_case
+dotnet_naming_style.camelCase.required_prefix =
+
+# Interfaces should start with I
+dotnet_naming_rule.interfaces_should_start_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_should_start_with_i.style = interface_style
+dotnet_naming_rule.interfaces_should_start_with_i.severity = suggestion
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = public, internal, private, protected, protected_internal
+
+dotnet_naming_style.interface_style.capitalization = pascal_case
+dotnet_naming_style.interface_style.required_prefix = I
+
+############ FILE-SCOPED NAMESPACES ############
+
+# You use block-scoped namespaces (good for Unity readability)
+csharp_style_namespace_declarations = block_scoped:suggestion
+
+############ MISC ############
+
+# Don't be annoying with unused usings unless it’s strict
+dotnet_remove_unnecessary_usings = silent
+
+# Allow slightly relaxed naming
+dotnet_diagnostic.IDE1006.severity = silent

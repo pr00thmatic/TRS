@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 395604119102011455}
   - component: {fileID: 173884818111120773}
   - component: {fileID: 2901772931623021399}
+  - component: {fileID: 2432413207853280088}
   m_Layer: 6
   m_Name: PlayerDetector
   m_TagString: Untagged
@@ -72,20 +73,8 @@ MonoBehaviour:
   <TriggerStay>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7193992458036481666}
-        m_TargetAssemblyTypeName: PlayerDoorOpenerInterface, Assembly-CSharp
-        m_MethodName: OnTriggerStayHandler
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7801139180240060417}
-        m_TargetAssemblyTypeName: PlayerDoorOpenerInterface, Assembly-CSharp
+      - m_Target: {fileID: 2432413207853280088}
+        m_TargetAssemblyTypeName: Shared.DoorInteractor, Assembly-CSharp
         m_MethodName: OnTriggerStayHandler
         m_Mode: 0
         m_Arguments:
@@ -99,8 +88,8 @@ MonoBehaviour:
   <TriggerExit>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7193992458036481666}
-        m_TargetAssemblyTypeName: PlayerDoorOpenerInterface, Assembly-CSharp
+      - m_Target: {fileID: 2432413207853280088}
+        m_TargetAssemblyTypeName: Shared.DoorInteractor, Assembly-CSharp
         m_MethodName: OnTriggerExitHandler
         m_Mode: 0
         m_Arguments:
@@ -111,18 +100,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7801139180240060417}
-        m_TargetAssemblyTypeName: PlayerDoorOpenerInterface, Assembly-CSharp
-        m_MethodName: OnTriggerExitHandler
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &2432413207853280088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023825283668097568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5983e6d81725d6a4786649cd38d77760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inside: {fileID: 7193992458036481666}
+  outside: {fileID: 7801139180240060417}
+  insideHand: 1
+  outsideHand: 0
+  detectedPlayer: {fileID: 0}
 --- !u!1 &2793909419996191371
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,10 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetector: {fileID: 395604119102011455}
   ikTarget: {fileID: 3679053039932035845}
-  isInside: 0
-  ikControl: 0
-  angle: 0
-  isActive: 0
+  weight: 0
 --- !u!1 &5066989823162229107
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,10 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetector: {fileID: 395604119102011455}
   ikTarget: {fileID: 3061997364445937046}
-  isInside: 1
-  ikControl: 0
-  angle: 0
-  isActive: 0
+  weight: 0
 --- !u!1 &8658304756711697272
 GameObject:
   m_ObjectHideFlags: 0

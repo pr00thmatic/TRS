@@ -216,7 +216,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
+    attribute: weight
     path: InsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
@@ -255,7 +255,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
+    attribute: weight
     path: OutsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
@@ -297,7 +297,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 2589715623
-      attribute: 608326933
+      attribute: 130897217
       script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
       typeID: 114
       customType: 0
@@ -306,7 +306,7 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
       path: 696110878
-      attribute: 608326933
+      attribute: 130897217
       script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
       typeID: 114
       customType: 0
@@ -909,7 +909,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
+    attribute: weight
     path: InsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}
@@ -948,7 +948,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: ikControl
+    attribute: weight
     path: OutsidePlayer
     classID: 114
     script: {fileID: 11500000, guid: 596140bdc1b0d694d80c2135a16b4dec, type: 3}

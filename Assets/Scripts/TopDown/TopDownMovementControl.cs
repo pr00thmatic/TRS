@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Shared;
 
 namespace Realities.TopDown {
@@ -33,9 +34,13 @@ namespace Realities.TopDown {
       controller.Move(controller.transform.forward * DesiredSpeed * Time.fixedDeltaTime);
     }
 
+    void OnMove (InputValue inputValue) {
+      Vector2 value = inputValue.Get<Vector2>();
+      commandedDirection = Vector3.ClampMagnitude(value.x * surveillanceSystem.Right +
+                                                  value.y * surveillanceSystem.Forward, 1);
+    }
+
     void Update () {
-      commandedDirection = Vector3.ClampMagnitude(Input.GetAxis("Horizontal") * surveillanceSystem.Right +
-                                                  Input.GetAxis("Vertical") * surveillanceSystem.Forward, 1);
       if (DesiredSpeed > DISTANCE_EPSILON) lazyAim.targetForward = commandedDirection.normalized;
       AnimationSpeed = Mathf.MoveTowards(AnimationSpeed, CharacterSpeed, animationSmoothnessSpeed * Time.deltaTime);
     }

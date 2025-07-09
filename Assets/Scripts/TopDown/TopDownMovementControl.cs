@@ -1,40 +1,49 @@
 using UnityEngine;
+using UnityEngine.AI;
 using Shared;
 
 namespace Realities.TopDown {
-  [RequireComponent(typeof(LazyAim))]
-  public class TopDownMovementControl : MonoBehaviour {
+  public partial class TopDownMovementControl : MonoBehaviour {
+    public const float DISTANCE_EPSILON = 0.1f;
+
     [Header("Initialization")]
     public SurveillanceSystem surveillanceSystem;
     public Animator animator;
-    public LazyAim aimer;
+    public LazyAim lazyAim;
+    public NavMeshAgent agent;
 
     [Header("Configuration")]
-    public float speed = 1;
-    public float animSpeed = 0.5f;
+    public float speed = 2;
+    public float animationSmoothnessSpeed = 3;
 
     [Header("Information")]
-    public Vector3 direction;
-    public Vector3 lastPosition; // to prevent it from doing the walk animation when walking into a wall
-    public float currentSpeed;
+    public Vector3 commandedDirection;
+    public float desiredSpeed;
+    public float characterSpeed;
+    public float animationSpeed;
+    public Vector3 lastPosition;
 
-    void Start () => lastPosition = transform.position;
-
-    void OnValidate () {
+    void Reset () {
       animator = GetComponentInChildren<Animator>();
       surveillanceSystem = FindFirstObjectByType<SurveillanceSystem>();
-      aimer = GetComponent<LazyAim>();
+      lazyAim = GetComponent<LazyAim>();
+      agent = GetComponent<NavMeshAgent>();
     }
 
     void FixedUpdate () {
-      direction = Vector3.ClampMagnitude((Input.GetAxis("Horizontal") * surveillanceSystem.Right +
-                                          Input.GetAxis("Vertical") * surveillanceSystem.Forward), 1);
-      transform.position += direction * speed * Time.deltaTime;
-      currentSpeed = (transform.position - lastPosition).magnitude / Time.deltaTime;
-      animator.SetFloat("speed", currentSpeed * animSpeed);
+      lastPosition = agent.transform.position;
+      agent.Move(agent.transform.forward * desiredSpeed * Time.deltaTime);
+      characterSpeed = (agent.transform.position - lastPosition).magnitude / Time.deltaTime;
+    }
 
-      if (direction.magnitude != 0) aimer.targetForward = direction;
-      lastPosition = transform.position;
+    void Update () {
+      commandedDirection = Vector3.ClampMagnitude(Input.GetAxis("Horizontal") * surveillanceSystem.Right +
+                                                  Input.GetAxis("Vertical") * surveillanceSystem.Forward, 1);
+      desiredSpeed = commandedDirection.magnitude * speed;
+      if (desiredSpeed > DISTANCE_EPSILON) lazyAim.targetForward = commandedDirection.normalized;
+
+      animationSpeed = Mathf.MoveTowards(animationSpeed, characterSpeed, animationSmoothnessSpeed * Time.deltaTime);
+      animator.SetFloat("speed", animationSpeed);
     }
   }
 }

@@ -9,6 +9,9 @@ namespace Shared {
     public float angularSpeed = 180;
 
     void Awake () => targetForward = transform.forward;
-    void FixedUpdate () => transform.forward = Vector3.RotateTowards(transform.forward, targetForward, angularSpeed * Time.deltaTime, 1);
+    void FixedUpdate () {
+      if (targetForward.magnitude == 0) return;
+      transform.forward = Vector3.RotateTowards(transform.forward, targetForward, angularSpeed * Time.deltaTime, 1);
+    }
   }
 }

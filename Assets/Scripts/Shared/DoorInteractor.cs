@@ -1,5 +1,4 @@
 using UnityEngine;
-using Shared.Utils;
 using UnityEngine.Assertions;
 
 namespace Shared {
@@ -16,7 +15,7 @@ namespace Shared {
     public PlayerReferences detectedPlayer;
     public DoorInteractionPoint InteractionPoint => !detectedPlayer? null : (IsInside? inside : outside);
     public bool IsInside => detectedPlayer? transform.InverseTransformPoint(detectedPlayer.transform.position).z > 0 : false;
-    public float AngleToDoor => detectedPlayer? Vector3.Angle(detectedPlayer.transform.forward, Math.Signify(IsInside) * -transform.forward) : -360;
+    public float AngleToDoor => detectedPlayer? Vector3.Angle(detectedPlayer.transform.forward, Utils.Math.Signify(IsInside) * -transform.forward) : -360;
     public IKControl TargetHand => detectedPlayer? detectedPlayer.GetHand(IsInside? insideHand : outsideHand) : null;
     public IKControl OtherHand => detectedPlayer? detectedPlayer.GetHand((IsInside? insideHand : outsideHand).GetOpposite()) : null;
 

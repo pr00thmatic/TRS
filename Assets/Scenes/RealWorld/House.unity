@@ -476,6 +476,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2194043451361794568, guid: 1cb7b5b5e744e564ebf0ec832cf5a9d8, type: 3}
   m_PrefabInstance: {fileID: 1055194022}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1129026322 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6107683495669408600, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
+  m_PrefabInstance: {fileID: 3901686319032847936}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1161699086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -548,6 +553,20 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 5700200867391814180, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
   m_PrefabInstance: {fileID: 3901686319032847936}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1336846399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129026322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0abd6f3a85472942a9c1df57d5b2543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetForward: {x: 0, y: 0, z: 0}
+  angularSpeed: 0
 --- !u!1 &1446583930
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,20 +651,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2412377658611507347, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
   m_PrefabInstance: {fileID: 3901686319032847936}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1477027003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222615517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0abd6f3a85472942a9c1df57d5b2543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetForward: {x: 0, y: 0, z: 0}
-  angularSpeed: 1.57
 --- !u!114 &1477027004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,12 +666,19 @@ MonoBehaviour:
   camera: {fileID: 1336846396}
   targetFollow: {fileID: 8272331}
   targetViewAvoidance: {fileID: 652366086}
-  aimer: {fileID: 1477027003}
+  aimer: {fileID: 1336846399}
   maxPerceptionRangeDegrees: 70
   maxRadianRotationSpeed: 0.2
-  degAngleToSpeedMax: 70
   maximumViewportDistanceTolerated: {x: 0.25, y: 0.25}
-  angleToViewer: 0
+  lag: 0.5
+  infoUpdateRate: 0.5
+  minimumRadianRotationSpeed: 0.1
+  timeSinceLastUpdate: 0
+  aknowledgedRead:
+    targetForward: {x: 0, y: 0, z: 0}
+    targetAngularSpeed: 0
+    readingTimestamp: 0
+  bufferSize: 0
 --- !u!1 &1510508332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,9 +1142,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2873794972738196738, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1477027004}
-    - targetCorrespondingSourceObject: {fileID: 2873794972738196738, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 6107683495669408600, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1477027003}
+      addedObject: {fileID: 1336846399}
   m_SourcePrefab: {fileID: 100100000, guid: 6e7a6686d8709a9469cecf109159097f, type: 3}
 --- !u!1001 &4631827407082608212
 PrefabInstance:

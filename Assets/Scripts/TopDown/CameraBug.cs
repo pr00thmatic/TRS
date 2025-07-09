@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Shared;
 
@@ -11,45 +10,48 @@ namespace Realities.TopDown {
     [SerializeField] private Transform targetViewAvoidance;
     [SerializeField] private LazyAim aimer;
 
-    // a more sofisticated set might be needed in the future
-    public Transform TargetFollow { get => targetFollow; set => targetFollow = value; }
-
     [Header("Configuration")]
     public float maxPerceptionRangeDegrees = 70; // yes! can be tweaked by other scripts
     public float maxRadianRotationSpeed = 1.5f; // this one too
-    public float degAngleToSpeedMax = 45;
     public Vector2 maximumViewportDistanceTolerated = new(0.2f, 0.2f);
-    public float overshootTime = 0.2f;
+    public float lag = 0.5f;
+    public float infoUpdateRate = 0.5f;
     public float minimumRadianRotationSpeed = 0.05f;
 
     [Header("Information")]
-    [SerializeField] private float angleToViewer;
-    [SerializeField] private float lastTimeOutsideFrustrum;
+    [SerializeField] private float AngleToViewer =>
+    Vector3.Angle(targetViewAvoidance.position - camera.transform.position, -targetViewAvoidance.forward);
+    private Queue<CameraBugSensorsReading> readings = new(); // i'd love to visualize this bad boi... but i don't own Odin ;n;
+    [SerializeField] private float timeSinceLastUpdate;
+    [SerializeField] private CameraBugSensorsReading aknowledgedRead;
+    [SerializeField] private int bufferSize;
 
-    public Vector2 TrackedViewportPointDistance => camera.WorldToViewportPoint(TargetFollow.position) - new Vector3(0.5f, 0.5f);
-    public bool IsBeingSeen => angleToViewer < maxPerceptionRangeDegrees;
-    public bool IsInsideFrustrum =>
-      Mathf.Abs(TrackedViewportPointDistance.x) < maximumViewportDistanceTolerated.x &&
-      Mathf.Abs(TrackedViewportPointDistance.y) < maximumViewportDistanceTolerated.y;
+    public CameraBugSensorsReading PeekReading => readings.Count > 0? readings.Peek() : null;
+    public Vector2 TrackedViewportPointDistance =>
+      Utils.Vectors.Abs(camera.WorldToViewportPoint(targetFollow.position) - new Vector3(0.5f, 0.5f));
+    public bool IsBeingSeen => AngleToViewer < maxPerceptionRangeDegrees;
+    public bool IsInsideFrustrum => Utils.Vectors.SmallerByComponent(TrackedViewportPointDistance, maximumViewportDistanceTolerated);
+    public Vector3 RealTimeTargetForward => targetFollow.position - transform.position;
+    public float RealTimeTargetSpeed => IsInsideFrustrum? 0 : IsBeingSeen? minimumRadianRotationSpeed : maxRadianRotationSpeed;
 
-    public float CameraSpeed {
-      get {
-        if (IsInsideFrustrum) {
-          if (Time.time - lastTimeOutsideFrustrum > overshootTime) return 0;
-        } else lastTimeOutsideFrustrum = Time.time;
-
-        float speed;
-        if (IsBeingSeen && !IsInsideFrustrum) speed = minimumRadianRotationSpeed;
-        else speed = Mathf.Clamp((angleToViewer - maxPerceptionRangeDegrees) / degAngleToSpeedMax, 0, 1) * maxRadianRotationSpeed;
-        return Mathf.Max(minimumRadianRotationSpeed, speed);
-      }
+    void Start () {
+      aknowledgedRead = new(this);
+      aknowledgedRead.targetAngularSpeed = 0; // I don't want the first read to be acted upon... must wait for the lag!!
     }
 
-    void Start () => lastTimeOutsideFrustrum = -100;
     void Update () {
-      angleToViewer = Vector3.Angle(targetViewAvoidance.position - camera.transform.position, -targetViewAvoidance.forward);
-      aimer.targetForward = TargetFollow.position - transform.position;
-      aimer.angularSpeed = CameraSpeed;
+      bufferSize = readings.Count;
+      if (Time.time - timeSinceLastUpdate > infoUpdateRate) {
+        readings.Enqueue(new CameraBugSensorsReading(this));
+        timeSinceLastUpdate = Time.time;
+      }
+
+      if (PeekReading != null && Time.time - PeekReading.readingTimestamp > lag) {
+        aknowledgedRead = readings.Dequeue();
+      }
+
+      aimer.targetForward = aknowledgedRead.targetForward;
+      aimer.angularSpeed = aknowledgedRead.targetAngularSpeed;
     }
   }
 }

@@ -5,7 +5,7 @@ using Shared;
 namespace Realities.TopDown {
   public class CameraBug : MonoBehaviour {
     [Header("Initialization")]
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
     [SerializeField] private Transform targetFollow;
     [SerializeField] private Transform targetViewAvoidance;
     [SerializeField] private LazyAim aimer;
@@ -19,13 +19,13 @@ namespace Realities.TopDown {
     public float minimumRadianRotationSpeed = 0.05f;
 
     [Header("Information")]
-    [SerializeField] private float AngleToViewer =>
-    Vector3.Angle(targetViewAvoidance.position - camera.transform.position, -targetViewAvoidance.forward);
-    private Queue<CameraBugSensorsReading> readings = new(); // i'd love to visualize this bad boi... but i don't own Odin ;n;
     [SerializeField] private float timeSinceLastUpdate;
     [SerializeField] private CameraBugSensorsReading aknowledgedRead;
     [SerializeField] private int bufferSize;
 
+    private float AngleToViewer =>
+    Vector3.Angle(targetViewAvoidance.position - camera.transform.position, -targetViewAvoidance.forward);
+    private Queue<CameraBugSensorsReading> readings = new(); // i'd love to visualize this bad boi... but i don't own Odin ;n;
     public CameraBugSensorsReading PeekReading => readings.Count > 0? readings.Peek() : null;
     public Vector2 TrackedViewportPointDistance =>
       Utils.Vectors.Abs(camera.WorldToViewportPoint(targetFollow.position) - new Vector3(0.5f, 0.5f));

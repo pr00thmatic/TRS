@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2412377658611507347}
+  - component: {fileID: 6848714520711328202}
   m_Layer: 0
   m_Name: SurveillanceCamera
   m_TagString: Untagged
@@ -32,6 +33,34 @@ Transform:
   - {fileID: 8433343219937690352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6848714520711328202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2873794972738196738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c2544ffdbac09489318882ee1a15f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 5700200867391814180}
+  targetFollow: {fileID: 0}
+  targetViewAvoidance: {fileID: 0}
+  aimer: {fileID: 3645525438212107868}
+  maxPerceptionRangeDegrees: 70
+  maxRadianRotationSpeed: 0.35
+  maximumViewportDistanceTolerated: {x: 0.25, y: 0.25}
+  lag: 0.3
+  infoUpdateRate: 0.3
+  minimumRadianRotationSpeed: 0.25
+  timeSinceLastUpdate: 0
+  aknowledgedRead:
+    targetForward: {x: 0, y: 0, z: 0}
+    targetAngularSpeed: 0
+    readingTimestamp: 0
+  bufferSize: 0
 --- !u!1 &6107683495669408600
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +72,7 @@ GameObject:
   - component: {fileID: 8433343219937690352}
   - component: {fileID: 5700200867391814180}
   - component: {fileID: 6265273883475292938}
+  - component: {fileID: 3645525438212107868}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -160,3 +190,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &3645525438212107868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107683495669408600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d62192053d1c241904e3a07715f68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2412377658611507347}
+  targetForward: {x: 0, y: 0, z: 0}
+  angularSpeed: 180

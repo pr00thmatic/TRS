@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Shared {
   public class PlayerReferences : MonoBehaviour {
-    public IKControl leftHand;
-    public IKControl rightHand;
+    public ControlableIKLimb leftHand;
+    public ControlableIKLimb rightHand;
 
-    public IKControl GetHand (HandSide hand) => hand == HandSide.Right ? rightHand : leftHand;
+    public ControlableIKLimb GetHand (HandSide hand) => hand == HandSide.Right ? rightHand : leftHand;
   }
 }

@@ -19,7 +19,7 @@ namespace Shared {
     [Header("Information")]
     [SerializeField] private float CurrentLikelihood { get => ratioSelector.currentRatio; set => ratioSelector.currentRatio = value; }
     public float TargetWeight => CurrentController != null && ratioSelector.currentRatio > 0? CurrentController.Weight : 0;
-    public MinimumRatioSelector<IIkLimbControlTaker> ratioSelector;
+    public BestRatioSelector<IIkLimbControlTaker> ratioSelector;
     public IIkLimbControlTaker CurrentController => ratioSelector.currentTarget;
 
     public void ReleaseControl (IIkLimbControlTaker controlTaker) {

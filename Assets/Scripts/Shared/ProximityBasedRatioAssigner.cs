@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Shared {
   [System.Serializable]
@@ -18,8 +16,8 @@ namespace Shared {
       if (ignoreHeight) distanceVector.y = 0;
       Vector3 angleVector = distanceVector;
       if (ignoreHeight) angleVector.y = 0;
-      float distanceRatio = 1 - Mathf.Clamp(distanceVector.magnitude / distance, 0, 1);
-      float angleRatio = 1 - Mathf.Clamp(Vector3.Angle(angleSource.forward, angleVector.normalized) / angle, 0, 1);
+      float distanceRatio = 1 - Mathf.Clamp01(distanceVector.magnitude / distance);
+      float angleRatio = 1 - Mathf.Clamp01(Vector3.Angle(angleSource.forward, angleVector.normalized) / angle);
       return angleRatio <= 0 || distanceRatio <= 0? Mathf.Min(angleRatio, distanceRatio) : (angleRatio + distanceRatio) / 2f;
     }
   }

@@ -608,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658304756711697272, guid: f68236b1db365c047a2390bf3449d620, type: 3}
       propertyPath: m_Name
-      value: Kitchen
+      value: StreetDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

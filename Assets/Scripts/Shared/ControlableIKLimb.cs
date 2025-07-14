@@ -17,48 +17,41 @@ namespace Shared {
     public float weightSpeed = 4;
 
     [Header("Information")]
-    [SerializeField] private float currentLikelihood;
-    public float TargetWeight => currentController != null? currentController.Weight : 0;
-    public IIkLimbControlTaker currentController;
+    [SerializeField] private float CurrentLikelihood { get => ratioSelector.currentRatio; set => ratioSelector.currentRatio = value; }
+    public float TargetWeight => CurrentController != null && ratioSelector.currentRatio > 0? CurrentController.Weight : 0;
+    public MinimumRatioSelector<IIkLimbControlTaker> ratioSelector;
+    public IIkLimbControlTaker CurrentController => ratioSelector.currentTarget;
 
     public void ReleaseControl (IIkLimbControlTaker controlTaker) {
-      if (currentController != controlTaker) return;
-      currentController = null;
       parentConstraint.constraintActive = false;
       if (parentConstraint.sourceCount != 0) parentConstraint.RemoveSource(0);
     }
 
     public void GrantControl (IIkLimbControlTaker controlTaker) {
-      if (currentController == controlTaker) return;
-      currentController = controlTaker;
       if (parentConstraint.sourceCount == 0)
         parentConstraint.AddSource(new ConstraintSource() { sourceTransform = controlTaker.IkTarget, weight = 1f });
       else
         parentConstraint.SetSource(0, new ConstraintSource() { sourceTransform = controlTaker.IkTarget, weight = 1f });
       parentConstraint.constraintActive = true;
-      currentLikelihood = controlTaker.LikelihoodToControl(this);
+      CurrentLikelihood = controlTaker.LikelihoodToControl(this);
     }
 
     void Update () {
       ikConstraint.weight = Mathf.MoveTowards(ikConstraint.weight, TargetWeight, weightSpeed * Time.deltaTime);
-      if (currentController != null) {
-        currentLikelihood = currentController.LikelihoodToControl(this);
-        if (currentLikelihood <= 0) ReleaseControl(currentController);
+      if (CurrentController != null) {
+        CurrentLikelihood = CurrentController.LikelihoodToControl(this);
       }
     }
 
     public void OnTriggerStay (Collider c) {
-      IIkLimbControlTaker foundController = c.GetComponentInParent<IIkLimbControlTaker>();
-      if (foundController == null || foundController == currentController) return;
-      if (foundController.GetTargetLimb(references) != this) return;
-      float foundLikelihood = foundController.LikelihoodToControl(this);
-      if ((currentController == null && foundLikelihood > 0) || (currentController != null && currentLikelihood < foundLikelihood))
-        GrantControl(foundController);
+      if (ratioSelector.Compare(c, found => found.GetTargetLimb(references) == this? found.LikelihoodToControl(this) : 0))
+        GrantControl(ratioSelector.currentTarget);
     }
 
     public void OnTriggerExit (Collider c) {
-      IIkLimbControlTaker foundController = c.GetComponentInParent<IIkLimbControlTaker>();
-      if (foundController != null && currentController == foundController) ReleaseControl(foundController);
+      var exitResult = ratioSelector.Exit(c);
+      if (exitResult.Item1)
+        ReleaseControl(exitResult.Item2);
     }
   }
 }

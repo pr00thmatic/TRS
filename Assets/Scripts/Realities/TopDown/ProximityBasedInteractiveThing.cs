@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Shared;
 
 namespace Realities.TopDown {
@@ -6,6 +7,8 @@ namespace Realities.TopDown {
     [Header("Configuration")]
     public ProximityBasedRatioAssigner proximity;
 
-    // public float GetRatio (PlayerInteractor interactor) => proximity.GetRatio(interactor.positionSource, interactor.angleSource);
+    public float GetRatio (PlayerInteractor interactor) => proximity.GetRatio(interactor.positionSource, interactor.angleSource);
+
+    public UnityEvent<IInteractiveThing, PlayerInteractor, bool> OnFocusChange { get; private set; } = new();
   }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Shared {
   [System.Serializable]
@@ -13,7 +14,10 @@ namespace Shared {
 
       float foundRatio = RatioGetter.Invoke(found);
       if ((currentTarget == null && foundRatio > 0) || (currentTarget != null && currentRatio < foundRatio)) {
+        var lastTarget = currentTarget;
         currentTarget = found;
+        if (lastTarget != null) OnSelectionLost?.Invoke(lastTarget);
+        OnSelectionAcquired?.Invoke(currentTarget);
         return true;
       }
 
@@ -27,10 +31,14 @@ namespace Shared {
         var leftTarget = currentTarget;
         currentTarget = default;
         currentRatio = 0;
+        if (leftTarget != null) OnSelectionLost?.Invoke(leftTarget);
         return (true, leftTarget);
       }
 
       return (false, currentTarget);
     }
+
+    public UnityEvent<T> OnSelectionLost { get; private set; } = new();
+    public UnityEvent<T> OnSelectionAcquired { get; private set; } = new();
   }
 }

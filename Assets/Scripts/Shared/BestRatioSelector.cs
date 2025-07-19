@@ -1,16 +1,22 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
 namespace Shared {
+  /// <summary>
+  /// The generic type T must be implemented by MonoBehaviour in order to work with the BestRatioSelector
+  /// </summary>
   [System.Serializable]
-  public class BestRatioSelector<T> {
+  public class BestRatioSelector<T> where T : class {
     public T currentTarget;
     public float currentRatio;
 
     // returns true if the target has changed
     public bool Compare (Collider c, System.Func<T, float> RatioGetter) {
       T found = c.GetComponentInParent<T>();
-      if (found == null || found.Equals(currentTarget)) return false;
+      Assert.IsTrue(typeof(T).IsInterface || typeof(T).IsAssignableFrom(typeof(MonoBehaviour)), "T has to be an implementation of MonoBehaviour! (or an interface... just make sure those interfaces are implementations of MonoBehaviours as well");
+
+      if (found == null || found == currentTarget) return false;
 
       float foundRatio = RatioGetter.Invoke(found);
       if ((currentTarget == null && foundRatio > 0) || (currentTarget != null && currentRatio < foundRatio)) {
@@ -27,7 +33,9 @@ namespace Shared {
     // returns (true if this exit caused the currentTarget to be cleared, the last thing that was currentTarget)
     public (bool, T) Exit (Collider c) {
       T found = c.GetComponentInParent<T>();
-      if (found != null && currentTarget != null && currentTarget.Equals(found)) {
+      Assert.IsTrue(typeof(T).IsInterface || typeof(T).IsAssignableFrom(typeof(MonoBehaviour)), "T has to be an implementation of MonoBehaviour! (or an interface... just make sure those interfaces are implementations of MonoBehaviours as well");
+
+      if (found != null && currentTarget != null && currentTarget == found) {
         var leftTarget = currentTarget;
         currentTarget = default;
         currentRatio = 0;
